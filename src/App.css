@@ -6,4 +6,27 @@
   width: 100%;
   height: 100vh;
   flex-direction: column;
+  background-color: #383838;
+}
+
+h1 {
+  font-size: 40px;
+  color: white;
+}
+
+h2 {
+  font-size: 100px;
+  color: white;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: yellow;
 }

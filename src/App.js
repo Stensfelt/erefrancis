@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+
+  const [textColor, setTextColor] = useState("white");
 
   function dayOfWeek() {
     var date = new Date();
@@ -19,37 +21,35 @@ function App() {
     return day;
   }
 
+  const day = dayOfWeek();
+  const today = new Date();
+  const hours = today.getHours();
+  const minutes = today.getMinutes();
+
+  const minutesLeft = 60 - minutes;
+
+  const isZeroMinutes = () => {
+    if (minutes === 0) return true;
+    else return false;
+  }
+
+  const printMinutes = () => {
+    if (!isZeroMinutes() && hours !== 15) return " och " + minutesLeft + " min";
+    else if (!isZeroMinutes() && hours === 15) return minutesLeft + " min";
+    else return "";
+  }
+
+  const printHours = () => {
+    if (hoursLeft() === 0) return "";
+    else return hoursLeft() + " h ";
+  }
+
+  const hoursLeft = () => {
+    if (isZeroMinutes()) return 16 - hours;
+    else return 15 - hours;
+  };
+
   const ereFrancis = () => {
-    const day = dayOfWeek();
-    const today = new Date();
-    const hours = today.getHours();
-    const minutes = today.getMinutes();
-
-    const minutesLeft = 60 - minutes;
-
-    const isZeroMinutes = () => {
-      if (minutes === 0) return true;
-      else return false;
-    }
-
-    const printMinutes = () => {
-      if (!isZeroMinutes() && hours !== 15) return " och " + minutesLeft + " min";
-      else if (!isZeroMinutes() && hours === 15) return minutesLeft + " min";
-      else return "";
-    }
-
-    const printHours = () => {
-      if (hoursLeft() === 0) return "";
-      else return hoursLeft() + " h";
-    }
-
-    const hoursLeft = () => {
-      if (isZeroMinutes()) return 15 - hours;
-      else return 16 - hours;
-    };
-
-
-
     if (day === "Friday" && hours >= 16) {
       return "JA";
     }
@@ -63,9 +63,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="question">ere francis (aka 'table and friends' eller 'friends table')?</h1>
+      <h1 className="question">ere francis (aka 'table and friends' och 'friends table')?</h1>
       <div>
-        <h2 className="answer">{ereFrancis()}</h2>
+        <h2 className={textColor}>{ereFrancis()}</h2>
         <p className="timer"></p>
       </div>
 
