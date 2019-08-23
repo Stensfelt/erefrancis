@@ -4,7 +4,7 @@ import './App.css';
 function App() {
 
   function dayOfWeek() {
-    var d = new Date();
+    var date = new Date();
     var weekday = new Array(7);
     weekday[0] = "Sunday";
     weekday[1] = "Monday";
@@ -14,9 +14,9 @@ function App() {
     weekday[5] = "Friday";
     weekday[6] = "Saturday";
 
-    var n = weekday[d.getDay()];
+    var day = weekday[date.getDay()];
 
-    return n;
+    return day;
   }
 
   const ereFrancis = () => {
@@ -25,23 +25,36 @@ function App() {
     const hours = today.getHours();
     const minutes = today.getMinutes();
 
+    const minutesLeft = 60 - minutes;
+
     const isZeroMinutes = () => {
-      if (minutes == 0) return true;
+      if (minutes === 0) return true;
       else return false;
     }
 
+    const printMinutes = () => {
+      if (!isZeroMinutes() && hours !== 15) return " och " + minutesLeft + " min";
+      else if (!isZeroMinutes() && hours === 15) return minutesLeft + " min";
+      else return "";
+    }
+
+    const printHours = () => {
+      if (hoursLeft() === 0) return "";
+      else return hoursLeft() + " h";
+    }
+
     const hoursLeft = () => {
-      if (isZeroMinutes()) return 16 - hours;
-      else return 15 - hours;
+      if (isZeroMinutes()) return 15 - hours;
+      else return 16 - hours;
     };
 
-    const minutesLeft = 60 - minutes;
+
 
     if (day === "Friday" && hours >= 16) {
       return "JA";
     }
     else if (day === "Friday") {
-      return "Nej, men om " + hoursLeft() + " timmar och " + minutesLeft + " minuter!";
+      return "Nej, men om " + printHours() + printMinutes();
     }
     else {
       return "Nej";
