@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
 function App() {
-
-  const [textColor, setTextColor] = useState("white");
 
   function dayOfWeek() {
     var date = new Date();
@@ -34,7 +32,7 @@ function App() {
   }
 
   const printMinutes = () => {
-    if (!isZeroMinutes() && hours !== 15) return " och " + minutesLeft + " min";
+    if (!isZeroMinutes() && hours !== 15) return " and " + minutesLeft + " min";
     else if (!isZeroMinutes() && hours === 15) return minutesLeft + " min";
     else return "";
   }
@@ -51,22 +49,23 @@ function App() {
 
   const ereFrancis = () => {
     if (day === "Friday" && hours >= 16) {
-      return "JA";
+      return "Yes";
     }
     else if (day === "Friday") {
-      return "Nej, men om " + printHours() + printMinutes();
+      return "Yes, in " + printHours() + printMinutes();
     }
     else {
-      return "Nej";
+      return "No";
     }
   }
 
   return (
     <div className="App">
-      <h1 className="question">ere francis (aka 'table and friends' och 'friends table')?</h1>
+      <h1 className="question">Time for Francis (aka 'table and friends' & 'friends table')?</h1>
       <div>
-        <h2 className={textColor}>{ereFrancis()}</h2>
-        <p className="timer"></p>
+        <h2 className={(ereFrancis() === "Yes") ? "green" : (ereFrancis() === "No" ? "red" : "yellow")}>
+          {ereFrancis()}
+        </h2>
       </div>
 
     </div>
